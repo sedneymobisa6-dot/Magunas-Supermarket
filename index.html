@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Magunas Supermarket — Sherehekea Bei Ya Mwanachi</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+ --green:#1a7a1a;--greend:#125512;--greenl:rgba(26,122,26,0.08);
+ --red:#cc0000;--redd:#aa0000;--redl:rgba(204,0,0,0.08);
+ --dark:#0d1f0d;--dark2:#162616;
+ --white:#ffffff;--light:#f4f9f4;--gray:#eef5ee;
+ --gold:#e6a817;--text:#1a2e1a;--muted:#5a6e5a;--border:#d4e8d4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--green)}
+/* PAGE SYSTEM */
+.page{display:none}.page.active{display:block}
+/* NAV */
+nav{
+ position:fixed;top:0;left:0;right:0;z-index:1000;
+ display:flex;align-items:center;justify-content:space-between;
+ padding:0 5%;height:70px;
+ background:var(--white);
+ border-bottom:3px solid var(--green);
+ box-shadow:0 2px 20px rgba(26,122,26,0.1);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none}
+.nav-logo-badge{
+ width:46px;height:46px;border-radius:50%;
+ background:linear-gradient(135deg,var(--green),var(--greend));
+ display:flex;align-items:center;justify-content:center;
+ font-family:'Montserrat',sans-serif;font-size:18px;font-weight:900;
+ color:#fff;box-shadow:0 4px 12px rgba(26,122,26,0.3);
+}
+.nav-logo-name{font-family:'Montserrat',sans-serif;font-size:17px;font-weight:800;color:var(--green);letter-spacing:-0.3px;line-height:1.1}
+.nav-logo-sub{font-size:9px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:12px;font-weight:700;color:var(--text);text-decoration:none;text-transform:uppercase;letter-spacing:1px;transition:color 0.2s;cursor:pointer;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--green);transform:scaleX(0);transition:transform 0.2s}
+.nav-links a:hover{color:var(--green)}.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{background:var(--green);color:#fff;padding:10px 22px;border-radius:100px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.2s}
+.nav-cta:hover{background:var(--greend);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;top:70px;left:0;right:0;background:var(--white);z-index:999;padding:20px 5%;border-bottom:3px solid var(--green);flex-direction:column;gap:4px}
+.mobile-menu a{font-size:13px;font-weight:700;color:var(--text);text-decoration:none;text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.mobile-menu.open{display:flex}
+/* HERO */
+.hero{min-height:100vh;padding-top:70px;position:relative;overflow:hidden;background:var(--dark)}
+.hero-bg-pattern{position:absolute;inset:0;opacity:0.04;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:32px 32px}
+.hero-green-glow{position:absolute;left:-100px;top:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(26,122,26,0.3) 0%,transparent 70%);border-radius:50%}
+.hero-red-glow{position:absolute;right:-100px;bottom:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(204,0,0,0.15) 0%,transparent 70%);border-radius:50%}
+.hero-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:80px 5%;display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center;min-height:calc(100vh - 70px)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(26,122,26,0.15);border:1px solid rgba(26,122,26,0.4);padding:6px 16px;border-radius:100px;margin-bottom:24px}
+.hero-tag-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-tag-text{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--green)}
+.hero-h1{font-family:'Montserrat',sans-serif;font-size:clamp(40px,6vw,80px);font-weight:900;color:#fff;line-height:1;letter-spacing:-1px;margin-bottom:8px}
+.hero-h1 .g{color:var(--green)}
+.hero-h1 .r{color:var(--red)}
+.hero-swahili{font-family:'Montserrat',sans-serif;font-size:clamp(16px,2.5vw,28px);font-weight:700;color:var(--gold);margin-bottom:20px;font-style:italic}
+.hero-desc{font-size:16px;color:rgba(255,255,255,0.55);line-height:1.8;max-width:520px;margin-bottom:40px;font-weight:300}
+.hero-desc strong{color:rgba(255,255,255,0.9);font-weight:600}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:60px}
+.btn-green{background:var(--green);color:#fff;padding:16px 36px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:100px;border:2px solid var(--green);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.25s}
+.btn-green:hover{background:transparent;color:var(--green)}
+.btn-ghost{background:transparent;color:rgba(255,255,255,0.7);padding:16px 36px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:100px;border:2px solid rgba(255,255,255,0.2);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.25s}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.6);color:#fff}
+.hero-stats{display:flex;gap:40px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap}
+.hero-stat-n{font-family:'Montserrat',sans-serif;font-size:36px;font-weight:900;color:#fff;line-height:1}
+.hero-stat-n span{color:var(--green)}
+.hero-stat-l{font-size:10px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+.hero-right{display:flex;flex-direction:column;gap:14px}
+.hero-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:22px;transition:all 0.3s}
+.hero-card:hover{background:rgba(26,122,26,0.1);border-color:rgba(26,122,26,0.3);transform:translateX(4px)}
+.hero-card-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.hero-card-icon{width:40px;height:40px;border-radius:10px;background:rgba(26,122,26,0.2);display:flex;align-items:center;justify-content:center;font-size:18px}
+.hero-card-title{font-size:14px;font-weight:700;color:#fff}
+.hero-card-desc{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.6}
+/* TICKER */
+.ticker{background:var(--green);padding:0;overflow:hidden;height:40px;display:flex;align-items:center}
+.ticker-track{display:flex;animation:scroll 15s linear infinite;white-space:nowrap}
+.ticker-track:hover{animation-play-state:paused}
+.ti{display:flex;align-items:center;gap:10px;padding:0 28px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.9)}
+.ti-dot{width:4px;height:4px;background:rgba(255,255,255,0.5);border-radius:50%;flex-shrink:0}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* SECTIONS */
+.sec{padding:100px 5%}
+.sec-inner{max-width:1200px;margin:0 auto}
+.sec-kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:14px}
+.sec-kicker::before{content:'';width:20px;height:3px;background:var(--green);border-radius:2px}
+.sec-kicker-text{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--green)}
+.sec-title{font-family:'Montserrat',sans-serif;font-size:clamp(30px,4vw,56px);font-weight:900;color:var(--text);line-height:1.05;letter-spacing:-0.5px;margin-bottom:18px}
+.sec-title .g{color:var(--green)}.sec-title .r{color:var(--red)}
+.sec-sub{font-size:16px;color:var(--muted);line-height:1.8;max-width:560px;font-weight:300}
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-visual{position:relative}
+.about-img{
+ width:100%;aspect-ratio:3/4;border-radius:24px;overflow:hidden;
+ background:linear-gradient(160deg,var(--greend) 0%,var(--green) 60%,var(--gold) 100%);
+ display:flex;align-items:flex-end;padding:36px;position:relative;
+}
+.about-img-pattern{position:absolute;inset:0;opacity:0.08;background-image:repeating-linear-gradient(-45deg,#fff 0,#fff 1px,transparent 0,transparent 40px)}
+.about-img-content{position:relative;z-index:2}
+.about-img-year{font-family:'Montserrat',sans-serif;font-size:100px;font-weight:900;color:rgba(255,255,255,0.08);line-height:1}
+.about-img-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:4px;color:rgba(255,255,255,0.6);margin-top:12px}
+.about-img-quote{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:#fff;line-height:1.3;margin-top:8px}
+.about-badge{position:absolute;top:28px;right:-20px;background:var(--red);border-radius:16px;padding:20px 24px;color:#fff;text-align:center;box-shadow:0 8px 32px rgba(204,0,0,0.3)}
+.about-badge-n{font-family:'Montserrat',sans-serif;font-size:36px;font-weight:900;line-height:1}
+.about-badge-l{font-size:9px;text-transform:uppercase;letter-spacing:2px;opacity:0.8;margin-top:4px}
+.about-timeline{display:flex;flex-direction:column;gap:20px;margin-top:36px}
+.tl-item{display:flex;gap:16px;align-items:flex-start}
+.tl-year{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:var(--green);min-width:48px;padding-top:2px}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:5px}
+.tl-text{font-size:13px;color:var(--muted);line-height:1.6}
+.tl-text strong{color:var(--text);font-weight:700}
+/* CATEGORIES */
+.cats-section{background:var(--gray)}
+.cats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.cat-tile{background:var(--white);border-radius:16px;overflow:hidden;border:1.5px solid var(--border);cursor:pointer;transition:all 0.3s}
+.cat-tile:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(26,122,26,0.12);border-color:var(--green)}
+.cat-tile-body{padding:28px 22px}
+.cat-emoji{font-size:36px;display:block;margin-bottom:14px}
+.cat-name{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px}
+.cat-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.cat-tile-foot{padding:12px 22px;border-top:1px solid var(--gray);display:flex;justify-content:space-between;align-items:center}
+.cat-count{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px}
+.cat-arr{font-size:16px;color:var(--green);transition:transform 0.2s}
+.cat-tile:hover .cat-arr{transform:translateX(4px)}
+/* CATALOG PAGE */
+.catalog-hdr{background:var(--dark);padding:120px 5% 60px;position:relative;overflow:hidden}
+.catalog-hdr::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 60%,#0d1a0d 100%)}
+.catalog-hdr::after{content:'';position:absolute;right:-50px;top:-50px;width:400px;height:400px;background:radial-gradient(circle,rgba(26,122,26,0.2) 0%,transparent 70%);border-radius:50%}
+.catalog-hdr-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.cat-back{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.4);cursor:pointer;margin-bottom:20px;transition:color 0.2s;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif}
+.cat-back:hover{color:var(--gold)}
+.catalog-h1{font-family:'Montserrat',sans-serif;font-size:clamp(32px,5vw,64px);font-weight:900;color:#fff;line-height:1;letter-spacing:-0.5px;margin-bottom:10px}
+.catalog-h1 .g{color:var(--green)}
+.catalog-sub-text{font-size:14px;color:rgba(255,255,255,0.4);max-width:500px;line-height:1.6}
+.catalog-body{padding:50px 5%;background:var(--light)}
+.catalog-body-inner{max-width:1200px;margin:0 auto}
+.prods-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+/* PRODUCT CARD */
+.prod{background:var(--white);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.3s}
+.prod:hover{box-shadow:0 10px 32px rgba(26,122,26,0.1);transform:translateY(-3px);border-color:var(--green)}
+.prod-img{width:100%;aspect-ratio:1;background:var(--gray);display:flex;align-items:center;justify-content:center;font-size:52px;position:relative}
+.prod-tag{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:4px 9px;border-radius:100px}
+.prod-tag.new{background:var(--green)}.prod-tag.popular{background:var(--gold);color:var(--text)}
+.prod-body{padding:14px 16px}
+.prod-cat{font-size:10px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:5px}
+.prod-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.4}
+.prod-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.prod-price-row{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.prod-price{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;color:var(--text)}
+.prod-old{font-size:11px;color:var(--muted);text-decoration:line-through}
+.prod-unit{font-size:10px;color:var(--muted);margin-bottom:2px}
+.prod-foot{padding:10px 16px;border-top:1px solid var(--gray);display:flex;justify-content:space-between;align-items:center}
+.prod-stock{font-size:10px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px}
+.add-btn{background:var(--green);color:#fff;border:none;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:8px 14px;border-radius:100px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background 0.2s}
+.add-btn:hover{background:var(--greend)}
+/* WHY */
+.why{background:linear-gradient(160deg,var(--dark) 0%,var(--dark2) 100%);color:#fff}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
+.why-feats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.feat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:24px;transition:all 0.3s}
+.feat:hover{background:rgba(26,122,26,0.08);border-color:rgba(26,122,26,0.3)}
+.feat-icon{font-size:26px;margin-bottom:12px}
+.feat-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:6px}
+.feat-desc{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.65}
+.why-panel{}
+.why-big{background:linear-gradient(135deg,var(--green),var(--greend));border-radius:20px;padding:44px;margin-bottom:14px;text-align:center;position:relative;overflow:hidden}
+.why-big::before{content:'';position:absolute;right:-20px;bottom:-20px;width:120px;height:120px;background:rgba(255,255,255,0.05);border-radius:50%}
+.why-big-n{font-family:'Montserrat',sans-serif;font-size:80px;font-weight:900;color:#fff;line-height:1}
+.why-big-l{font-size:11px;color:rgba(255,255,255,0.65);text-transform:uppercase;letter-spacing:3px;margin-top:8px}
+.why-smalls{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.why-sm{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:20px;text-align:center}
+.why-sm-n{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:#fff}
+.why-sm-l{font-size:9px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+/* BRANCHES */
+.branches-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.branch{border:1.5px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.3s}
+.branch:hover{box-shadow:0 10px 36px rgba(26,122,26,0.1);border-color:var(--green)}
+.branch-hdr{background:linear-gradient(135deg,var(--greend),var(--green));padding:26px 22px;position:relative;overflow:hidden}
+.branch-hdr::after{content:'';position:absolute;right:-15px;top:-15px;width:70px;height:70px;background:rgba(255,255,255,0.08);border-radius:50%}
+.branch-icon{font-size:26px;margin-bottom:8px;display:block}
+.branch-name{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;color:#fff}
+.branch-loc{font-size:10px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:2px;margin-top:3px}
+.branch-body{padding:18px 22px;background:var(--white)}
+.b-row{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.b-ic{color:var(--green);flex-shrink:0;font-size:13px}
+.b-open{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green)}
+.b-open::before{content:'';width:5px;height:5px;background:var(--green);border-radius:50%}
+/* CSR */
+.csr{background:var(--greenl);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.csr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px}
+.csr-card{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:28px 22px;text-align:center;transition:all 0.3s}
+.csr-card:hover{border-color:var(--green);transform:translateY(-4px);box-shadow:0 8px 28px rgba(26,122,26,0.1)}
+.csr-icon{font-size:36px;margin-bottom:16px}
+.csr-title{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:var(--text);margin-bottom:10px}
+.csr-desc{font-size:12px;color:var(--muted);line-height:1.7}
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.test{background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:28px;transition:all 0.3s;position:relative}
+.test:hover{box-shadow:0 8px 28px rgba(26,122,26,0.08);border-color:var(--green)}
+.test::before{content:'"';position:absolute;top:16px;right:20px;font-family:'Montserrat',sans-serif;font-size:72px;color:var(--greenl);line-height:1;font-weight:900}
+.test-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:12px}
+.test-text{font-size:13px;color:var(--text);line-height:1.75;margin-bottom:20px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:12px}
+.test-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--greend));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.test-name{font-size:13px;font-weight:700;color:var(--text)}
+.test-role{font-size:11px;color:var(--muted);margin-top:1px}
+/* CTA */
+.cta-sec{background:linear-gradient(135deg,var(--greend) 0%,var(--green) 50%,#2a8a2a 100%);color:#fff;padding:100px 5%;text-align:center;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;opacity:0.04;background-image:radial-gradient(circle,#fff 1px,transparent 1px);background-size:24px 24px}
+.cta-inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+.cta-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:4px;color:rgba(255,255,255,0.6);margin-bottom:16px}
+.cta-h2{font-family:'Montserrat',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-0.5px;margin-bottom:18px}
+.cta-sub{font-size:16px;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:40px;font-weight:300}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--green);padding:16px 40px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:2px;border-radius:100px;border:2px solid #fff;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.25s}
+.btn-white:hover{background:transparent;color:#fff}
+.btn-outline-w{background:transparent;color:rgba(255,255,255,0.8);padding:16px 40px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:100px;border:2px solid rgba(255,255,255,0.3);cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:all 0.25s}
+.btn-outline-w:hover{border-color:#fff;color:#fff}
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.c-blocks{display:flex;flex-direction:column;gap:22px}
+.c-item{display:flex;gap:16px;align-items:flex-start}
+.c-icon{width:46px;height:46px;background:var(--greenl);border:1.5px solid rgba(26,122,26,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:3px}
+.c-val{font-size:14px;font-weight:600;color:var(--text)}
+.c-val a{color:var(--text);text-decoration:none}.c-val a:hover{color:var(--green)}
+.cf{display:flex;flex-direction:column;gap:14px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cf-field{display:flex;flex-direction:column;gap:5px}
+.cf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted)}
+.cf-input{padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none;background:var(--white);transition:border 0.2s}
+.cf-input:focus{border-color:var(--green)}
+.cf-ta{resize:vertical;min-height:110px}
+.cf-submit{background:var(--green);color:#fff;border:none;padding:14px 32px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:100px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background 0.2s;align-self:flex-start}
+.cf-submit:hover{background:var(--greend)}
+/* MAP + REVIEWS */
+.map-sec{background:var(--gray)}
+/* FOOTER */
+footer{background:var(--dark);color:#fff;padding:72px 5% 32px}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.footer-brand-name{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.3px;margin-bottom:6px}
+.footer-brand-tag{font-size:9px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:3px}
+.footer-brand-desc{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.75;margin-top:16px;max-width:280px}
+.footer-socials{display:flex;gap:8px;margin-top:20px}
+.fsoc{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;transition:all 0.2s;font-weight:700}
+.fsoc:hover{background:var(--green);border-color:var(--green);color:#fff}
+.footer-col-h{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:rgba(255,255,255,0.3);margin-bottom:18px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;cursor:pointer;transition:color 0.2s}
+.footer-links a:hover{color:var(--green)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.25)}
+.footer-copy span{color:var(--green)}
+.footer-reg{font-size:11px;color:rgba(255,255,255,0.15)}
+/* RESPONSIVE */
+@media(max-width:1024px){.hero-right{display:none}.hero-inner{grid-template-columns:1fr}}
+@media(max-width:900px){
+ .nav-links,.nav-cta{display:none}.hamburger{display:flex}
+ .about-wrap,.why-grid,.contact-wrap,.footer-top{grid-template-columns:1fr}
+ .cats-grid,.prods-grid,.branches-grid{grid-template-columns:repeat(2,1fr)}
+ .csr-grid,.test-grid{grid-template-columns:1fr}
+ .why-feats{grid-template-columns:1fr}
+ .hero-stats{gap:24px}.about-badge{display:none}
+ .cf-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+ .cats-grid,.prods-grid{grid-template-columns:1fr}
+ .hero-btns,.cta-btns{flex-direction:column}
+ .why-smalls{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<!-- FLOATING BUTTONS -->
+<div style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:12px;align-items:flex-end">
+ <a href="mailto:office@magunas.com?subject=Product%20Inquiry%20%2F%20Order&body=Hello%20Magunas%20Supermarket%2C%0A%0AI%20would%20like%20to%20inquire%20about%20the%20following%3A%0A%0AProduct(s)%3A%0AQuantity%3A%0ADelivery%20Location%3A%0A%0AKindly%20send%20me%20a%20quotation.%0A%0AThank%20you." title="Email Us" style="width:50px;height:50px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(204,0,0,0.35);text-decoration:none;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+ </a>
+ <a href="https://wa.me/254721628040?text=Hello%20Magunas%20Supermarket!%20%F0%9F%91%8B%0A%0ANimetapata%20website%20yenu%20na%20ningependa%20kujua%20zaidi%20kuhusu%20bidhaa%20zenu.%0A%0A(I%20found%20your%20website%20and%20would%20like%20to%20inquire%20about%20your%20products.)%0A%0AProduct(s)%20I%20need%3A%0AQuantity%3A%0ADelivery%20Location%3A%0A%0AKindly%20advise%20on%20availability%20and%20pricing.%20Asante!" target="_blank" title="WhatsApp" style="width:54px;height:54px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,0.4);text-decoration:none;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+ <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+ </a>
+</div>
+<!-- NAV -->
+<nav id="nav">
+ <div class="nav-logo" onclick="goHome()">
+ <div class="nav-logo-badge">M</div>
+ <div>
+ <div class="nav-logo-name">Magunas Supermarket</div>
+ <div class="nav-logo-sub">Sherehekea Bei Ya Mwanachi</div>
+ </div>
+ </div>
+ <ul class="nav-links">
+ <li><a onclick="goHome()">Home</a></li>
+ <li><a onclick="goHome();goTo('about')">About</a></li>
+ <li><a onclick="showPage('categories')">Products</a></li>
+ <li><a onclick="goHome();goTo('branches')">Branches</a></li>
+ <li><a onclick="goHome();goTo('csr')">Community</a></li>
+ <li><a onclick="goHome();goTo('contact')">Contact</a></li>
+ </ul>
+ <button class="nav-cta" onclick="goHome();goTo('contact')">Shop Now</button>
+ <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileNav">
+ <a onclick="goHome();toggleMenu()">Home</a>
+ <a onclick="goHome();goTo('about');toggleMenu()">About</a>
+ <a onclick="showPage('categories');toggleMenu()">Products</a>
+ <a onclick="goHome();goTo('branches');toggleMenu()">Branches</a>
+ <a onclick="goHome();goTo('csr');toggleMenu()">Community</a>
+ <a onclick="goHome();goTo('contact');toggleMenu()">Contact</a>
+</div>
+<!-- =========================================== HOME PAGE -->
+<div id="page-home" class="page active">
+<!-- HERO -->
+<section class="hero">
+ <div class="hero-bg-pattern"></div>
+ <div class="hero-green-glow"></div>
+ <div class="hero-red-glow"></div>
+ <div class="hero-inner">
+ <div>
+ <div class="hero-tag"><div class="hero-tag-dot"></div><span class="hero-tag-text">Kenya's Favourite Neighbourhood Supermarket</span></div>
+ <h1 class="hero-h1">MAGUNA<br/><span class="g">ANDU</span><br/><span class="r">SUPER</span>MARKET</h1>
+ <div class="hero-swahili">"Sherehekea Bei Ya Mwanachi"</div>
+ <p class="hero-desc">
+ <strong>Celebrate the People's Prices.</strong> From a humble hawker's stall in Mukuyu market to 35 branches across Kenya — Simon Wachira built Magunas for <strong>you.</strong>
+ </p>
+ <div class="hero-btns">
+ <button class="btn-green" onclick="showPage('categories')">Shop Our Products &rarr;</button>
+ <button class="btn-ghost" onclick="goTo('branches')">Find a Branch</button>
+ </div>
+ <div class="hero-stats">
+ <div><div class="hero-stat-n">35<span>+</span></div><div class="hero-stat-l">Branches Nationwide</div></div>
+ <div><div class="hero-stat-n">30<span>+</span></div><div class="hero-stat-l">Years in Business</div></div>
+ <div><div class="hero-stat-n">5<span>+</span></div><div class="hero-stat-l">Counties Covered</div></div>
+ <div><div class="hero-stat-n">1M<span>+</span></div><div class="hero-stat-l">Customers Served</div></div>
+ </div>
+ </div>
+ <div class="hero-right">
+ <div class="hero-card">
+ <div class="hero-card-top"><div class="hero-card-icon">🥬</div><div class="hero-card-title">Fresh Produce Daily</div></div>
+ <div class="hero-card-desc">Handpicked fruits and vegetables sourced locally every morning. Always fresh, always affordable.</div>
+ </div>
+ <div class="hero-card">
+ <div class="hero-card-top"><div class="hero-card-icon">🥐</div><div class="hero-card-title">In-Store Bakery</div></div>
+ <div class="hero-card-desc">Freshly baked bread, cinnamon rolls and pastries. Magunas yoghurt — our own brand loved by thousands.</div>
+ </div>
+ <div class="hero-card">
+ <div class="hero-card-top"><div class="hero-card-icon">🚚</div><div class="hero-card-title">Home Delivery</div></div>
+ <div class="hero-card-desc">We deliver to Murang'a, Nyeri, Kirinyaga and Laikipia. Order and we bring it to your door.</div>
+ </div>
+ <div class="hero-card">
+ <div class="hero-card-top"><div class="hero-card-icon">🕐</div><div class="hero-card-title">Open 24 Hours</div></div>
+ <div class="hero-card-desc">Most Magunas branches are open 24 hours, 7 days a week. We're always here when you need us.</div>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- TICKER -->
+<div class="ticker">
+ <div class="ticker-track">
+ <div class="ti"><div class="ti-dot"></div>Fresh Produce Daily</div>
+ <div class="ti"><div class="ti-dot"></div>In-Store Bakery</div>
+ <div class="ti"><div class="ti-dot"></div>Magunas Yoghurt — Our Own Brand</div>
+ <div class="ti"><div class="ti-dot"></div>35+ Branches Nationwide</div>
+ <div class="ti"><div class="ti-dot"></div>Open 24 Hours</div>
+ <div class="ti"><div class="ti-dot"></div>Home Delivery Available</div>
+ <div class="ti"><div class="ti-dot"></div>Sherehekea Bei Ya Mwanachi!</div>
+ <div class="ti"><div class="ti-dot"></div>Call: +254 602 031 262</div>
+ <div class="ti"><div class="ti-dot"></div>Fresh Produce Daily</div>
+ <div class="ti"><div class="ti-dot"></div>In-Store Bakery</div>
+ <div class="ti"><div class="ti-dot"></div>Magunas Yoghurt — Our Own Brand</div>
+ <div class="ti"><div class="ti-dot"></div>35+ Branches Nationwide</div>
+ <div class="ti"><div class="ti-dot"></div>Open 24 Hours</div>
+ <div class="ti"><div class="ti-dot"></div>Home Delivery Available</div>
+ <div class="ti"><div class="ti-dot"></div>Sherehekea Bei Ya Mwanachi!</div>
+ <div class="ti"><div class="ti-dot"></div>Call: +254 602 031 262</div>
+ </div>
+</div>
+<!-- ABOUT -->
+<section class="sec" id="about">
+ <div class="sec-inner">
+ <div class="about-wrap">
+ <div class="about-visual">
+ <div class="about-img">
+ <div class="about-img-pattern"></div>
+ <div class="about-img-content">
+ <div class="about-img-year">1990</div>
+ <div class="about-img-label">Founded in Mukuyu, Murang'a</div>
+ <div class="about-img-quote">"From hawker to hypermarket — built for the people."</div>
+ </div>
+ </div>
+ <div class="about-badge">
+ <div class="about-badge-n">35+</div>
+ <div class="about-badge-l">Branches</div>
+ </div>
+ </div>
+ <div>
+ <div class="sec-kicker"><span class="sec-kicker-text">Our Story</span></div>
+ <h2 class="sec-title">From Hawker to<br/><span class="g">Household Name.</span></h2>
+ <p class="sec-sub">Simon Wachira started hawking in Mukuyu market in the 1980s — saving every shilling. In 1990 he opened a small retail shop. Today Magunas Supermarket has 35 branches across Kenya, competing head-to-head with Naivas, Quickmart and Carrefour.</p>
+ <div class="about-timeline">
+ <div class="tl-item">
+ <div class="tl-year">1980s</div>
+ <div class="tl-dot"></div>
+ <div class="tl-text"><strong>Simon Wachira starts as a village hawker</strong> in Mukuyu market, Murang'a. Saving every shilling with a dream.</div>
+ </div>
+ <div class="tl-item">
+ <div class="tl-year">1990</div>
+ <div class="tl-dot"></div>
+ <div class="tl-text"><strong>First retail shop opens</strong> at Kwa Maji area — now famously known as Magunas Stage.</div>
+ </div>
+ <div class="tl-item">
+ <div class="tl-year">2000s</div>
+ <div class="tl-dot"></div>
+ <div class="tl-text"><strong>Maguna Andu Wholesalers launched.</strong> Goods sourced directly from manufacturers. The name means "Beneficial to the People."</div>
+ </div>
+ <div class="tl-item">
+ <div class="tl-year">2012</div>
+ <div class="tl-dot"></div>
+ <div class="tl-text"><strong>Nokras Hotel founded</strong> — a four-star facility in Murang'a, diversifying into hospitality.</div>
+ </div>
+ <div class="tl-item">
+ <div class="tl-year">Today</div>
+ <div class="tl-dot"></div>
+ <div class="tl-text"><strong>35+ branches across Kenya</strong> — Nairobi, Mt Kenya, Embu, Meru, Nyeri, Kirinyaga, Kitui and growing.</div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- CATEGORIES -->
+<section class="sec cats-section" id="categories-home">
+ <div class="sec-inner">
+ <div class="sec-kicker"><span class="sec-kicker-text">What We Offer</span></div>
+ <h2 class="sec-title">Shop by <span class="g">Category</span></h2>
+ <p class="sec-sub">From fresh farm produce to household essentials — everything your family needs under one roof at prices that celebrate the mwanachi.</p>
+ <div class="cats-grid">
+ <div class="cat-tile" onclick="showCatalog('produce')">
+ <div class="cat-tile-body"><span class="cat-emoji">🥬</span><div class="cat-name">Fresh Produce</div><div class="cat-desc">Tomatoes, onions, sukuma wiki, potatoes, fruits — handpicked daily</div></div>
+ <div class="cat-tile-foot"><span class="cat-count">View Products</span><span class="cat-arr">&#8594;</span></div>
+ </div>
+ <div class="cat-tile" onclick="showCatalog('dairy')">
+ <div class="cat-tile-body"><span class="cat-emoji">🥛</span><div class="cat-name">Dairy & Eggs</div><div class="cat-desc">Brookside, KCC, Magunas Yoghurt, butter, eggs — fresh daily</div></div>
+ <div class="cat-tile-foot"><span class="cat-count">View Products</span><span class="cat-arr">&#8594;</span></div>
+ </div>
+ <div class="cat-tile" onclick="showCatalog('bakery')">
+ <div class="cat-tile-body"><span class="cat-emoji">🍞</span><div class="cat-name">Bakery</div><div class="cat-desc">Fresh bread, cinnamon rolls, pastries — baked in-store daily</div></div>
+ <div class="cat-tile-foot"><span class="cat-count">View Products</span><span class="cat-arr">&#8594;</span></div>
+ </div>
+ <div class="cat-tile" onclick="showCatalog('household')">
+ <div class="cat-tile-body"><span class="cat-emoji">🧺</span><div class="cat-name">Household</div><div class="cat-desc">Ariel, Omo, Jik, Harpic, cleaning products & home essentials</div></div>
+ <div class="cat-tile-foot"><span class="cat-count">View Products</span><span class="cat-arr">&#8594;</span></div>
+ </div>
+ <div class="cat-tile" onclick="showCatalog('personal')">
+ <div class="cat-tile-body"><span class="cat-emoji">🧴</span><div class="cat-name">Personal Care</div><div class="cat-desc">Nivea, Geisha, Colgate, soaps, shampoo & toiletries</div></div>
+ <div class="cat-tile-foot"><span class="cat-count">View Products</span><span class="cat-arr">&#8594;</span></div>
+ </div>
+ <div class="cat-tile" onclick="showCatalog('beverages')">
+ <div class="cat-tile-body"><span class="cat-emoji">🥤</span><div class="cat-name">Beverages</div><div class="cat-desc">Coca Cola, Fanta, Milo, Kericho Gold, juices & soft drinks</div></div>
+ <div class="cat-tile-foot"><span class="cat-count">View Products</span><span class="cat-arr">&#8594;</span></div>
+ </div>
+ <div class="cat-tile" onclick="showCatalog('drygoods')">
+ <div class="cat-tile-body"><span class="cat-emoji">🌾</span><div class="cat-name">Dry Goods</div><div class="cat-desc">Pembe flour, sugar, rice, cooking oil, grains & staple foods</div></div>
+ <div class="cat-tile-foot"><span class="cat-count">View Products</span><span class="cat-arr">&#8594;</span></div>
+ </div>
+ <div class="cat-tile" onclick="showCatalog('electronics')">
+ <div class="cat-tile-body"><span class="cat-emoji">🏠</span><div class="cat-name">Home & Electronics</div><div class="cat-desc">Sufurias, small appliances, kitchenware & clothing</div></div>
+ <div class="cat-tile-foot"><span class="cat-count">View Products</span><span class="cat-arr">&#8594;</span></div>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- FEATURED PRODUCTS -->
+<section class="sec" id="featured">
+ <div class="sec-inner">
+ <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:40px">
+ <div><div class="sec-kicker"><span class="sec-kicker-text">Top Picks</span></div><h2 class="sec-title" style="font-size:clamp(26px,3.5vw,44px)">Today's <span class="g">Best Deals</span></h2></div>
+ <button class="btn-green" onclick="showPage('categories')" style="align-self:flex-end">View All Products &rarr;</button>
+ </div>
+ <div class="prods-grid">
+ <div class="prod">
+ <div class="prod-img">🥬<div class="prod-tag new">Fresh</div></div>
+ <div class="prod-body">
+ <div class="prod-cat">Fresh Produce</div>
+ <div class="prod-name">Sukuma Wiki — 1 Bundle</div>
+ <div class="prod-desc">Fresh locally sourced collard greens. Handpicked daily from Kenyan farms.</div>
+ <div class="prod-price-row"><span class="prod-price">KES 20</span></div>
+ <div class="prod-unit">Per bundle</div>
+ </div>
+ <div class="prod-foot"><span class="prod-stock">In Stock</span><button class="add-btn" onclick="addFeedback(this)">Add to Cart</button></div>
+ </div>
+ <div class="prod">
+ <div class="prod-img">🥛<div class="prod-tag popular">Popular</div></div>
+ <div class="prod-body">
+ <div class="prod-cat">Dairy</div>
+ <div class="prod-name">Magunas Yoghurt 400ml</div>
+ <div class="prod-desc">Our own brand — thick, rich and creamy. The yoghurt Kenyans can't stop buying.</div>
+ <div class="prod-price-row"><span class="prod-price">KES 120</span></div>
+ <div class="prod-unit">Per 400ml cup</div>
+ </div>
+ <div class="prod-foot"><span class="prod-stock">In Stock</span><button class="add-btn" onclick="addFeedback(this)">Add to Cart</button></div>
+ </div>
+ <div class="prod">
+ <div class="prod-img">🍞<div class="prod-tag new">Baked Fresh</div></div>
+ <div class="prod-body">
+ <div class="prod-cat">Bakery</div>
+ <div class="prod-name">Supa Loaf Bread 400g</div>
+ <div class="prod-desc">Freshly baked white bread. Soft, fluffy and perfect for every Kenyan breakfast.</div>
+ <div class="prod-price-row"><span class="prod-price">KES 55</span><span class="prod-old">KES 60</span></div>
+ <div class="prod-unit">Per loaf</div>
+ </div>
+ <div class="prod-foot"><span class="prod-stock">In Stock</span><button class="add-btn" onclick="addFeedback(this)">Add to Cart</button></div>
+ </div>
+ <div class="prod">
+ <div class="prod-img">🌾<div class="prod-tag">Sale</div></div>
+ <div class="prod-body">
+ <div class="prod-cat">Dry Goods</div>
+ <div class="prod-name">Pembe Maize Flour 2kg</div>
+ <div class="prod-desc">Premium sifted maize meal for smooth ugali. A staple in every Kenyan household.</div>
+ <div class="prod-price-row"><span class="prod-price">KES 170</span><span class="prod-old">KES 185</span></div>
+ <div class="prod-unit">Per 2kg pack</div>
+ </div>
+ <div class="prod-foot"><span class="prod-stock">In Stock</span><button class="add-btn" onclick="addFeedback(this)">Add to Cart</button></div>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- WHY MAGUNAS -->
+<section class="sec why">
+ <div class="sec-inner">
+ <div class="sec-kicker"><span class="sec-kicker-text" style="color:rgba(255,255,255,0.5)">Why Choose Us</span></div>
+ <h2 class="sec-title" style="color:#fff">Why Kenyans Choose <span class="g">Magunas</span></h2>
+ <div class="why-grid">
+ <div class="why-feats">
+ <div class="feat"><div class="feat-icon">💰</div><div class="feat-title">Bei Ya Mwanachi</div><div class="feat-desc">Pocket-friendly prices on everything — from fresh produce to household goods. No surprises at the till.</div></div>
+ <div class="feat"><div class="feat-icon">🥬</div><div class="feat-title">Fresh Daily</div><div class="feat-desc">Fresh produce handpicked every morning. Our bakery bakes fresh bread and pastries in-store daily.</div></div>
+ <div class="feat"><div class="feat-icon">🕐</div><div class="feat-title">Open 24 Hours</div><div class="feat-desc">Most branches never close. We're here at 3am or 3pm — whatever your family needs, whenever you need it.</div></div>
+ <div class="feat"><div class="feat-icon">🚚</div><div class="feat-title">Home Delivery</div><div class="feat-desc">Delivery fleet serving Murang'a, Nyeri, Kirinyaga and Laikipia. Order and we come to you.</div></div>
+ <div class="feat"><div class="feat-icon">🏪</div><div class="feat-title">35+ Branches</div><div class="feat-desc">From Nairobi to Mombasa, Mt Kenya to Kitui — there's a Magunas near you wherever you are in Kenya.</div></div>
+ <div class="feat"><div class="feat-icon">❤️</div><div class="feat-title">Community First</div><div class="feat-desc">Simon Wachira built Magunas for the people. Hundreds of Kenyan youth employed. Local brands given platforms.</div></div>
+ </div>
+ <div class="why-panel">
+ <div class="why-big"><div class="why-big-n">35+</div><div class="why-big-l">Branches Across Kenya</div></div>
+ <div class="why-smalls">
+ <div class="why-sm"><div class="why-sm-n">30+</div><div class="why-sm-l">Years</div></div>
+ <div class="why-sm"><div class="why-sm-n">24hr</div><div class="why-sm-l">Most Branches</div></div>
+ <div class="why-sm"><div class="why-sm-n">1M+</div><div class="why-sm-l">Customers</div></div>
+ <div class="why-sm"><div class="why-sm-n">5+</div><div class="why-sm-l">Counties</div></div>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- BRANCHES -->
+<section class="sec" id="branches">
+ <div class="sec-inner">
+ <div class="sec-kicker"><span class="sec-kicker-text">Find Us</span></div>
+ <h2 class="sec-title">Our <span class="g">Branches</span></h2>
+ <p class="sec-sub">35+ branches across Kenya — from Nairobi to Mt Kenya, Embu, Meru, Nyeri, Kirinyaga, Kitui and growing.</p>
+ <div class="branches-grid">
+ <div class="branch">
+ <div class="branch-hdr"><span class="branch-icon">🏢</span><div class="branch-name">Murang'a — Head Office</div><div class="branch-loc">Murang'a County</div></div>
+ <div class="branch-body">
+ <div class="b-row"><span class="b-ic">📍</span><span>Mukuyu, Murang'a Town</span></div>
+ <div class="b-row"><span class="b-ic">📞</span><span>+254 602 031 262 / +254 714 143952</span></div>
+ <div class="b-row"><span class="b-ic">✉️</span><span>office@magunas.com</span></div>
+ <div class="b-row"><span class="b-ic">🕐</span><span>Open 24 Hours, 7 Days</span></div>
+ <div class="b-open">Open Now</div>
+ </div>
+ </div>
+ <div class="branch">
+ <div class="branch-hdr"><span class="branch-icon">🏪</span><div class="branch-name">Pangani — Nairobi</div><div class="branch-loc">Nairobi County</div></div>
+ <div class="branch-body">
+ <div class="b-row"><span class="b-ic">📍</span><span>Northview Road, Nairobi</span></div>
+ <div class="b-row"><span class="b-ic">📞</span><span>+254 797 884345</span></div>
+ <div class="b-row"><span class="b-ic">🕐</span><span>Mon–Sun: 7:30 AM – 9:00 PM</span></div>
+ <div class="b-open">Open Now</div>
+ </div>
+ </div>
+ <div class="branch">
+ <div class="branch-hdr"><span class="branch-icon">🏪</span><div class="branch-name">Embu Branch</div><div class="branch-loc">Embu County</div></div>
+ <div class="branch-body">
+ <div class="b-row"><span class="b-ic">📍</span><span>Panga Plaza, Ruguru-Ngandori, Embu</span></div>
+ <div class="b-row"><span class="b-ic">📞</span><span>+254 724 163984</span></div>
+ <div class="b-row"><span class="b-ic">🕐</span><span>Open 24 Hours, 7 Days</span></div>
+ <div class="b-open">Open Now</div>
+ </div>
+ </div>
+ <div class="branch">
+ <div class="branch-hdr"><span class="branch-icon">🏪</span><div class="branch-name">Meru Makutano</div><div class="branch-loc">Meru County</div></div>
+ <div class="branch-body">
+ <div class="b-row"><span class="b-ic">📍</span><span>Meru – Maua Road, Makutano</span></div>
+ <div class="b-row"><span class="b-ic">📞</span><span>+254 720 540929</span></div>
+ <div class="b-row"><span class="b-ic">🕐</span><span>Open 24 Hours, 7 Days</span></div>
+ <div class="b-open">Open Now</div>
+ </div>
+ </div>
+ <div class="branch">
+ <div class="branch-hdr"><span class="branch-icon">🏪</span><div class="branch-name">Karatina — Nyeri</div><div class="branch-loc">Nyeri County</div></div>
+ <div class="branch-body">
+ <div class="b-row"><span class="b-ic">📍</span><span>Karatina Town, Nyeri County</span></div>
+ <div class="b-row"><span class="b-ic">📞</span><span>+254 602 031 262</span></div>
+ <div class="b-row"><span class="b-ic">🕐</span><span>Open 24 Hours, 7 Days</span></div>
+ <div class="b-open">Open Now</div>
+ </div>
+ </div>
+ <div class="branch" style="border-color:var(--green)">
+ <div class="branch-hdr" style="background:linear-gradient(135deg,var(--red),var(--redd))"><span class="branch-icon">🚀</span><div class="branch-name">30+ More Branches</div><div class="branch-loc">Nationwide & Growing</div></div>
+ <div class="branch-body">
+ <div class="b-row"><span class="b-ic">📍</span><span>Sagana, Ndenderu, Kayole, Jogoo Road, Kitui, Kirinyaga and more</span></div>
+ <div class="b-row"><span class="b-ic">📞</span><span>+254 602 031 262</span></div>
+ <div class="b-row"><span class="b-ic">✉️</span><span>office@magunas.com</span></div>
+ <div class="b-open" style="color:var(--gold)">Always Expanding</div>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- CSR -->
+<section class="sec csr" id="csr">
+ <div class="sec-inner">
+ <div class="sec-kicker"><span class="sec-kicker-text">Community Impact</span></div>
+ <h2 class="sec-title">Beneficial to <span class="g">the People</span></h2>
+ <p class="sec-sub">Maguna Andu — beneficial to the people. It's not just a name. It's how Simon Wachira runs his business and his life.</p>
+ <div class="csr-grid">
+ <div class="csr-card"><div class="csr-icon">⛪</div><div class="csr-title">Church & Faith</div><div class="csr-desc">Contributing to church development and religious community projects across Murang'a County.</div></div>
+ <div class="csr-card"><div class="csr-icon">😷</div><div class="csr-title">COVID-19 Support</div><div class="csr-desc">During the pandemic Magunas stepped up — donating food and essential supplies to communities in need.</div></div>
+ <div class="csr-card"><div class="csr-icon">👶</div><div class="csr-title">Youth Employment</div><div class="csr-desc">Hundreds of Kenyan youth employed across all branches. Local companies given platforms to market their products.</div></div>
+ <div class="csr-card"><div class="csr-icon">🌾</div><div class="csr-title">Supporting Local Brands</div><div class="csr-desc">Local farmers and producers given shelf space inside Magunas stores — growing the local economy from within.</div></div>
+ </div>
+ </div>
+</section>
+<!-- TESTIMONIALS -->
+<section class="sec">
+ <div class="sec-inner">
+ <div class="sec-kicker"><span class="sec-kicker-text">Customer Love</span></div>
+ <h2 class="sec-title">What Kenyans <span class="g">Say</span></h2>
+ <div class="test-grid">
+ <div class="test">
+ <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+ <div class="test-text">"Magunas is rapidly becoming everyone's favourite. The fresh farm produce, bakery and the spacious layout make it a joy to shop there. And that Magunas yoghurt — I have not bought any other brand since!"</div>
+ <div class="test-author"><div class="test-av">WN</div><div><div class="test-name">Wanjiru Ndungu</div><div class="test-role">Regular Shopper, Murang'a</div></div></div>
+ </div>
+ <div class="test">
+ <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+ <div class="test-text">"The prices are relatively low compared to other shops and the variety is sufficient. Friendly staff who come to your aid whenever you have a query. Truly the people's supermarket."</div>
+ <div class="test-author"><div class="test-av">EK</div><div><div class="test-name">Eliza Kamau</div><div class="test-role">Shopper, Embu Branch</div></div></div>
+ </div>
+ <div class="test">
+ <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+ <div class="test-text">"I love that they're open 24 hours. I can do my shopping late at night without any stress. And the delivery to Kirinyaga has been excellent — always on time."</div>
+ <div class="test-author"><div class="test-av">JM</div><div><div class="test-name">James Mwangi</div><div class="test-role">Delivery Customer, Kirinyaga</div></div></div>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- CTA -->
+<section class="cta-sec">
+ <div class="cta-inner">
+ <div class="cta-eyebrow">Sherehekea Bei Ya Mwanachi</div>
+ <h2 class="cta-h2">Celebrate the<br/>People's Prices.</h2>
+ <p class="cta-sub">Visit your nearest Magunas Supermarket or order for delivery. Quality products, pocket-friendly prices, and a team that genuinely cares about your family.</p>
+ <div class="cta-btns">
+ <button class="btn-white" onclick="showPage('categories')">Shop Our Products</button>
+ <a href="tel:+254602031262" class="btn-outline-w">Call: +254 602 031 262</a>
+ </div>
+ </div>
+</section>
+<!-- CONTACT -->
+<section class="sec" id="contact">
+ <div class="sec-inner">
+ <div class="sec-kicker"><span class="sec-kicker-text">Get In Touch</span></div>
+ <h2 class="sec-title">Contact <span class="g">Us</span></h2>
+ <div class="contact-wrap">
+ <div class="c-blocks">
+ <p style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:8px">Find a branch near you, inquire about products or arrange a delivery. Our team is always ready to help.</p>
+ <div class="c-item"><div class="c-icon">📍</div><div><div class="c-label">Head Office</div><div class="c-val">Mukuyu, Murang'a Town, Kenya</div></div></div>
+ <div class="c-item"><div class="c-icon">📞</div><div><div class="c-label">Phone</div><div class="c-val"><a href="tel:+254602031262">+254 602 031 262</a><br/><a href="tel:+254721628040">+254 721 628 040</a></div></div></div>
+ <div class="c-item"><div class="c-icon">✉️</div><div><div class="c-label">Email</div><div class="c-val"><a href="mailto:office@magunas.com">office@magunas.com</a></div></div></div>
+ <div class="c-item"><div class="c-icon">📱</div><div><div class="c-label">Social Media</div><div class="c-val">@magunaskenya on Instagram & Facebook</div></div></div>
+ <div class="c-item"><div class="c-icon">🕐</div><div><div class="c-label">Most Branches</div><div class="c-val">Open 24 Hours, 7 Days a Week</div></div></div>
+ </div>
+ <div>
+ <form class="cf" onsubmit="submitForm(event)">
+ <div class="cf-row">
+ <div class="cf-field"><label class="cf-label">Your Name</label><input class="cf-input" placeholder="Jane Wambui" required/></div>
+ <div class="cf-field"><label class="cf-label">Phone Number</label><input class="cf-input" placeholder="0722 000 000" required/></div>
+ </div>
+ <div class="cf-field"><label class="cf-label">Email Address</label><input class="cf-input" type="email" placeholder="jane@email.com"/></div>
+ <div class="cf-field"><label class="cf-label">Subject</label>
+ <select class="cf-input">
+ <option>Product Inquiry</option>
+ <option>Delivery Inquiry</option>
+ <option>Branch Information</option>
+ <option>Wholesale / Bulk Order</option>
+ <option>Complaint or Feedback</option>
+ <option>General Inquiry</option>
+ </select>
+ </div>
+ <div class="cf-field"><label class="cf-label">Message</label><textarea class="cf-input cf-ta" placeholder="How can we help you today?"></textarea></div>
+ <button type="submit" class="cf-submit">Send Message &rarr;</button>
+ </form>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- MAP + REVIEWS -->
+<section class="sec map-sec" id="map-reviews">
+ <div class="sec-inner">
+ <div class="sec-kicker"><span class="sec-kicker-text">Find Us & Reviews</span></div>
+ <h2 class="sec-title">Visit Us &amp; <span class="g">See What People Say</span></h2>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px">
+ <div>
+ <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:12px">Head Office — Mukuyu, Murang'a Town</div>
+ <div style="border-radius:16px;overflow:hidden;border:1.5px solid var(--border);box-shadow:0 4px 20px rgba(26,122,26,0.08)">
+ <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988!2d37.1566!3d-0.7237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sMagunas+Supermarket+Muranga!5e0!3m2!1sen!2ske!4v1" width="100%" height="380" style="border:0;display:block" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+ </div>
+ <a href="https://maps.google.com/?q=Magunas+Supermarket+Mukuyu+Muranga" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);text-decoration:none">
+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+ Open in Google Maps &rarr;
+ </a>
+ </div>
+ <div>
+ <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:12px">Google Reviews</div>
+ <div style="background:var(--white);border:1.5px solid var(--border);border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(26,122,26,0.06)">
+ <div style="display:flex;align-items:center;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--gray);margin-bottom:20px">
+ <div style="text-align:center">
+ <div style="font-family:'Montserrat',sans-serif;font-size:60px;font-weight:900;color:var(--text);line-height:1">4.4</div>
+ <div style="color:var(--gold);font-size:18px;letter-spacing:2px">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+ <div style="font-size:11px;color:var(--muted);margin-top:4px">Google Rating</div>
+ </div>
+ <div style="flex:1">
+ <div style="display:flex;flex-direction:column;gap:6px">
+ <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">5</span><div style="flex:1;height:6px;background:var(--gray);border-radius:3px;overflow:hidden"><div style="width:60%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+ <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">4</span><div style="flex:1;height:6px;background:var(--gray);border-radius:3px;overflow:hidden"><div style="width:25%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+ <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">3</span><div style="flex:1;height:6px;background:var(--gray);border-radius:3px;overflow:hidden"><div style="width:8%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+ <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">2</span><div style="flex:1;height:6px;background:var(--gray);border-radius:3px;overflow:hidden"><div style="width:4%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+ <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--muted);width:12px">1</span><div style="flex:1;height:6px;background:var(--gray);border-radius:3px;overflow:hidden"><div style="width:3%;height:100%;background:var(--gold);border-radius:3px"></div></div></div>
+ </div>
+ </div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:16px">
+ <div style="padding-bottom:14px;border-bottom:1px solid var(--gray)">
+ <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+ <div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">WN</div><div><div style="font-size:13px;font-weight:700;color:var(--text)">Wanjiru Ndungu</div><div style="font-size:10px;color:var(--muted)">1 week ago</div></div></div>
+ <div style="color:var(--gold);font-size:12px">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+ </div>
+ <div style="font-size:13px;color:var(--muted);line-height:1.6">"Magunas yoghurt alone is worth the trip. Fresh produce every day and the staff are so friendly. This is my supermarket."</div>
+ </div>
+ <div style="padding-bottom:14px;border-bottom:1px solid var(--gray)">
+ <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+ <div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">JK</div><div><div style="font-size:13px;font-weight:700;color:var(--text)">Joseph Kariuki</div><div style="font-size:10px;color:var(--muted)">2 weeks ago</div></div></div>
+ <div style="color:var(--gold);font-size:12px">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+ </div>
+ <div style="font-size:13px;color:var(--muted);line-height:1.6">"Open 24 hours is a game changer for my family. Always stocked, always clean, always affordable. Bei ya mwanachi for real."</div>
+ </div>
+ <div>
+ <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+ <div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">EK</div><div><div style="font-size:13px;font-weight:700;color:var(--text)">Eliza K.</div><div style="font-size:10px;color:var(--muted)">1 month ago</div></div></div>
+ <div style="color:var(--gold);font-size:12px">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+ </div>
+ <div style="font-size:13px;color:var(--muted);line-height:1.6">"Prices are low compared to other shops. Varieties are sufficient. It is great shopping here!"</div>
+ </div>
+ </div>
+ <a href="https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding:12px;border:1.5px solid var(--border);border-radius:100px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text);text-decoration:none;transition:all 0.2s" onmouseover="this.style.borderColor='var(--green)';this.style.color='var(--green)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">
+ <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+ Write a Google Review
+ </a>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+<!-- FOOTER -->
+<footer>
+ <div class="footer-inner">
+ <div class="footer-top">
+ <div>
+ <div class="footer-brand-name">Magunas Supermarket</div>
+ <div class="footer-brand-tag">Sherehekea Bei Ya Mwanachi</div>
+ <p class="footer-brand-desc">From a humble hawker in Mukuyu market to 35 branches nationwide — Maguna Andu means beneficial to the people. That is our promise to every Kenyan family.</p>
+ <div class="footer-socials">
+ <a href="https://facebook.com/magunaskenya" class="fsoc" target="_blank">f</a>
+ <a href="https://instagram.com/magunaskenya" class="fsoc" target="_blank">ig</a>
+ <a href="https://twitter.com/magunaskenya" class="fsoc" target="_blank">tw</a>
+ </div>
+ </div>
+ <div>
+ <div class="footer-col-h">Products</div>
+ <ul class="footer-links">
+ <li><a onclick="showCatalog('produce')">Fresh Produce</a></li>
+ <li><a onclick="showCatalog('dairy')">Dairy & Eggs</a></li>
+ <li><a onclick="showCatalog('bakery')">Bakery</a></li>
+ <li><a onclick="showCatalog('household')">Household</a></li>
+ <li><a onclick="showCatalog('beverages')">Beverages</a></li>
+ <li><a onclick="showCatalog('drygoods')">Dry Goods</a></li>
+ </ul>
+ </div>
+ <div>
+ <div class="footer-col-h">Company</div>
+ <ul class="footer-links">
+ <li><a onclick="goTo('about')">About Magunas</a></li>
+ <li><a onclick="goTo('branches')">Our Branches</a></li>
+ <li><a onclick="goTo('csr')">Community</a></li>
+ <li><a onclick="goTo('map-reviews')">Reviews</a></li>
+ <li><a onclick="goTo('contact')">Contact Us</a></li>
+ </ul>
+ </div>
+ <div>
+ <div class="footer-col-h">Contact</div>
+ <ul class="footer-links">
+ <li><a href="tel:+254602031262">+254 602 031 262</a></li>
+ <li><a href="tel:+254721628040">+254 721 628 040</a></li>
+ <li><a href="mailto:office@magunas.com">office@magunas.com</a></li>
+ <li><a>Mukuyu, Murang'a Town</a></li>
+ <li><a>Most Branches Open 24hrs</a></li>
+ </ul>
+ </div>
+ </div>
+ <div class="footer-bottom">
+ <div class="footer-copy">&copy; 2025 <span>Magunas Supermarket.</span> All Rights Reserved. Murang'a, Kenya.</div>
+ <div class="footer-reg">Maguna Andu Wholesalers &mdash; Beneficial to the People</div>
+ </div>
+ </div>
+</footer>
+</div><!-- end home -->
+<!-- =========================================== CATEGORIES PAGE -->
+<div id="page-categories" class="page">
+ <div style="background:var(--dark);padding:120px 5% 60px;position:relative;overflow:hidden">
+ <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--dark) 0%,var(--dark2) 100%)"></div>
+ <div style="position:absolute;left:-50px;top:-50px;width:400px;height:400px;background:radial-gradient(circle,rgba(26,122,26,0.2) 0%,transparent 70%);border-radius:50%"></div>
+ <div style="max-width:1200px;margin:0 auto;position:relative;z-index:2">
+ <button class="cat-back" onclick="goHome()">&larr; Back to Home</button>
+ <h1 style="font-family:'Montserrat',sans-serif;font-size:clamp(36px,6vw,72px);font-weight:900;color:#fff;line-height:1;letter-spacing:-0.5px;margin-bottom:14px">Shop by <span style="color:var(--green)">Category</span></h1>
+ <p style="font-size:15px;color:rgba(255,255,255,0.4);max-width:500px;line-height:1.7;font-weight:300">Everything your family needs — fresh produce to household essentials — at prices that celebrate the mwanachi.</p>
+ </div>
+ </div>
+ <div style="background:var(--light);padding:50px 5%">
+ <div style="max-width:1200px;margin:0 auto">
+ <div class="cats-grid">
+ <div class="cat-tile" onclick="showCatalog('produce')"><div class="cat-tile-body"><span class="cat-emoji">🥬</span><div class="cat-name">Fresh Produce</div><div class="cat-desc">Tomatoes, onions, sukuma wiki, potatoes, fruits & fresh vegetables</div></div><div class="cat-tile-foot"><span class="cat-count">15+ Products</span><span class="cat-arr">&#8594;</span></div></div>
+ <div class="cat-tile" onclick="showCatalog('dairy')"><div class="cat-tile-body"><span class="cat-emoji">🥛</span><div class="cat-name">Dairy & Eggs</div><div class="cat-desc">Brookside, KCC, Magunas Yoghurt, butter, eggs & dairy products</div></div><div class="cat-tile-foot"><span class="cat-count">12+ Products</span><span class="cat-arr">&#8594;</span></div></div>
+ <div class="cat-tile" onclick="showCatalog('bakery')"><div class="cat-tile-body"><span class="cat-emoji">🍞</span><div class="cat-name">Bakery</div><div class="cat-desc">Fresh bread, cinnamon rolls, mandazi, cakes & in-store pastries</div></div><div class="cat-tile-foot"><span class="cat-count">10+ Products</span><span class="cat-arr">&#8594;</span></div></div>
+ <div class="cat-tile" onclick="showCatalog('household')"><div class="cat-tile-body"><span class="cat-emoji">🧺</span><div class="cat-name">Household</div><div class="cat-desc">Ariel, Omo, Jik, Harpic, cleaning products & home essentials</div></div><div class="cat-tile-foot"><span class="cat-count">20+ Products</span><span class="cat-arr">&#8594;</span></div></div>
+ <div class="cat-tile" onclick="showCatalog('personal')"><div class="cat-tile-body"><span class="cat-emoji">🧴</span><div class="cat-name">Personal Care</div><div class="cat-desc">Nivea, Geisha, Colgate, soaps, shampoo & toiletries</div></div><div class="cat-tile-foot"><span class="cat-count">15+ Products</span><span class="cat-arr">&#8594;</span></div></div>
+ <div class="cat-tile" onclick="showCatalog('beverages')"><div class="cat-tile-body"><span class="cat-emoji">🥤</span><div class="cat-name">Beverages</div><div class="cat-desc">Coca Cola, Fanta, Milo, Kericho Gold, juices & soft drinks</div></div><div class="cat-tile-foot"><span class="cat-count">15+ Products</span><span class="cat-arr">&#8594;</span></div></div>
+ <div class="cat-tile" onclick="showCatalog('drygoods')"><div class="cat-tile-body"><span class="cat-emoji">🌾</span><div class="cat-name">Dry Goods</div><div class="cat-desc">Pembe flour, sugar, rice, cooking oil, grains & staple foods</div></div><div class="cat-tile-foot"><span class="cat-count">20+ Products</span><span class="cat-arr">&#8594;</span></div></div>
+ <div class="cat-tile" onclick="showCatalog('electronics')"><div class="cat-tile-body"><span class="cat-emoji">🏠</span><div class="cat-name">Home & Electronics</div><div class="cat-desc">Sufurias, small appliances, kitchenware & clothing</div></div><div class="cat-tile-foot"><span class="cat-count">10+ Products</span><span class="cat-arr">&#8594;</span></div></div>
+ </div>
+ </div>
+ </div>
+</div>
+<!-- =========================================== CATALOG PAGE -->
+<div id="page-catalog" class="page">
+ <div class="catalog-hdr">
+ <div class="catalog-hdr-inner">
+ <button class="cat-back" onclick="showPage('categories')">&larr; All Categories</button>
+ <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
+ <div>
+ <h1 class="catalog-h1" id="cat-title">Fresh <span class="g">Produce</span></h1>
+ <p class="catalog-sub-text" id="cat-sub">Handpicked daily from Kenyan farms</p>
+ </div>
+ <button class="btn-green" onclick="goHome();goTo('contact')">Inquire / Order</button>
+ </div>
+ </div>
+ </div>
+ <div class="catalog-body">
+ <div class="catalog-body-inner">
+ <div class="prods-grid" id="cat-products"></div>
+ </div>
+ </div>
+</div>
+<script>
+var PRODUCTS = {
+ produce:[
+ {icon:'🥬',cat:'Fresh Produce',name:'Sukuma Wiki — 1 Bundle',desc:'Fresh collard greens handpicked daily from Kenyan farms. Rich in iron and vitamins.',price:'KES 20',old:'',unit:'Per bundle',tag:'Fresh'},
+ {icon:'🍅',cat:'Fresh Produce',name:'Tomatoes — 1kg',desc:'Ripe, locally sourced tomatoes. Perfect for cooking or salads.',price:'KES 80',old:'KES 100',unit:'Per 1kg',tag:'Sale'},
+ {icon:'🧅',cat:'Fresh Produce',name:'Red Onions — 1kg',desc:'Fresh red onions from Kenyan farms. Essential for every Kenyan kitchen.',price:'KES 60',old:'',unit:'Per 1kg',tag:''},
+ {icon:'🥔',cat:'Fresh Produce',name:'Irish Potatoes — 2kg',desc:'Clean, fresh Irish potatoes. Great for frying, boiling or making chips.',price:'KES 120',old:'KES 140',unit:'Per 2kg bag',tag:'Sale'},
+ {icon:'🍌',cat:'Fresh Produce',name:'Bananas — 1 Hand',desc:'Sweet, ripe Kenyan bananas. Fresh from Mt Kenya region farms.',price:'KES 50',old:'',unit:'Per hand',tag:'Fresh'},
+ {icon:'🥦',cat:'Fresh Produce',name:'Broccoli — 1 Head',desc:'Fresh broccoli sourced locally. High in nutrients and perfect for healthy meals.',price:'KES 80',old:'',unit:'Per head',tag:''},
+ {icon:'🌽',cat:'Fresh Produce',name:'Maize — 3 Cobs',desc:'Fresh sweet maize cobs. Boil or roast — a Kenyan favourite.',price:'KES 30',old:'',unit:'Per 3 cobs',tag:'Popular'},
+ {icon:'🥕',cat:'Fresh Produce',name:'Carrots — 500g',desc:'Crisp, fresh carrots. Perfect for cooking, juicing or snacking.',price:'KES 40',old:'',unit:'Per 500g',tag:''},
+ ],
+ dairy:[
+ {icon:'🥛',cat:'Dairy',name:'Magunas Yoghurt 400ml',desc:'Our own brand — thick, rich and creamy. The yoghurt Kenyans cannot stop buying. Available in assorted flavours.',price:'KES 120',old:'',unit:'Per 400ml cup',tag:'Popular'},
+ {icon:'🥛',cat:'Dairy',name:'Brookside UHT Milk 500ml',desc:'Long life full cream milk from Brookside Dairy. Rich in calcium and vitamins.',price:'KES 75',old:'',unit:'Per 500ml pack',tag:''},
+ {icon:'🥛',cat:'Dairy',name:'KCC Butter 250g',desc:'Premium KCC fresh butter. Perfect for baking, spreading and cooking.',price:'KES 180',old:'KES 195',unit:'Per 250g block',tag:'Sale'},
+ {icon:'🥚',cat:'Dairy',name:'Fresh Eggs — Tray of 30',desc:'Fresh farm eggs. Protein-rich and sourced from Kenyan poultry farms.',price:'KES 480',old:'KES 510',unit:'Per tray (30 eggs)',tag:'Sale'},
+ {icon:'🧀',cat:'Dairy',name:'Milky Way Cream Cheese 200g',desc:'Smooth, creamy cheese. Perfect for sandwiches, pasta and snacking.',price:'KES 220',old:'',unit:'Per 200g',tag:''},
+ {icon:'🍦',cat:'Dairy',name:'Magunas Yoghurt 1 Litre',desc:'Family size Magunas yoghurt. Our own brand, thick and rich in flavour.',price:'KES 280',old:'',unit:'Per 1L',tag:'New'},
+ ],
+ bakery:[
+ {icon:'🍞',cat:'Bakery',name:'Supa Loaf Bread 400g',desc:'Freshly baked white bread. Soft, fluffy and perfect for every Kenyan breakfast.',price:'KES 55',old:'KES 60',unit:'Per loaf',tag:'Fresh'},
+ {icon:'🥐',cat:'Bakery',name:'Cinnamon Rolls — Pack of 4',desc:'Our famous in-store cinnamon rolls. Freshly baked daily — the reason customers keep coming back.',price:'KES 120',old:'',unit:'Per pack of 4',tag:'Popular'},
+ {icon:'🫓',cat:'Bakery',name:'Brown Bread 400g',desc:'Freshly baked wholemeal brown bread. Rich in fibre and perfect for a healthy lifestyle.',price:'KES 65',old:'',unit:'Per loaf',tag:'Fresh'},
+ {icon:'🥧',cat:'Bakery',name:'Mandazi — Half Dozen',desc:'Freshly fried mandazis from our in-store bakery. Light and fluffy — a Kenyan classic.',price:'KES 60',old:'',unit:'Per 6 pieces',tag:''},
+ {icon:'🎂',cat:'Bakery',name:'Birthday Cake — Small',desc:'In-store baked celebration cake. Freshly made to order. Available in assorted flavours.',price:'KES 850',old:'',unit:'Per small cake',tag:'New'},
+ ],
+ household:[
+ {icon:'🧺',cat:'Household',name:'Ariel Washing Powder 1kg',desc:'Powerful stain-removing detergent. Works in both cold and warm water for sparkling clean clothes.',price:'KES 320',old:'KES 340',unit:'Per 1kg pack',tag:'Sale'},
+ {icon:'🧴',cat:'Household',name:'Omo Washing Powder 2kg',desc:'Trusted laundry detergent. Removes tough stains and leaves clothes fresh and clean.',price:'KES 490',old:'',unit:'Per 2kg pack',tag:''},
+ {icon:'🪣',cat:'Household',name:'Jik Bleach 1 Litre',desc:'Multi-purpose bleach for disinfecting, whitening clothes and cleaning surfaces.',price:'KES 185',old:'KES 200',unit:'Per 1L bottle',tag:'Sale'},
+ {icon:'🚽',cat:'Household',name:'Harpic Toilet Cleaner 750ml',desc:'Powerful toilet cleaner and disinfectant. Removes limescale and kills 99.9% of germs.',price:'KES 220',old:'',unit:'Per 750ml bottle',tag:''},
+ {icon:'🧹',cat:'Household',name:'Broom & Dustpan Set',desc:'Durable plastic broom with matching dustpan. Effective for indoor and outdoor sweeping.',price:'KES 280',old:'',unit:'Per set',tag:''},
+ {icon:'🍳',cat:'Household',name:'Aluminium Sufuria 5 Litres',desc:'Heavy gauge aluminium cooking pot. Durable for everyday cooking. Even heat distribution.',price:'KES 650',old:'KES 700',unit:'Per piece',tag:'Sale'},
+ ],
+ personal:[
+ {icon:'🧴',cat:'Personal Care',name:'Nivea Body Lotion 400ml',desc:'Classic Nivea moisturizing lotion. Enriched with Eucerit for long-lasting skin care.',price:'KES 380',old:'',unit:'Per 400ml bottle',tag:''},
+ {icon:'🫧',cat:'Personal Care',name:'Geisha Beauty Soap 175g',desc:'Popular beauty soap with pleasant fragrance. Gentle on skin, leaves you fresh all day.',price:'KES 65',old:'',unit:'Per bar',tag:'Popular'},
+ {icon:'🦷',cat:'Personal Care',name:'Colgate Toothpaste 100ml',desc:'Triple action — cavity protection, whitening and fresh breath in every brush.',price:'KES 120',old:'KES 130',unit:'Per tube',tag:'Sale'},
+ {icon:'💆',cat:'Personal Care',name:'Sunsilk Shampoo 340ml',desc:'Nourishing shampoo for smooth, manageable and shiny hair. Available in multiple variants.',price:'KES 280',old:'',unit:'Per 340ml bottle',tag:''},
+ {icon:'🪒',cat:'Personal Care',name:'Gillette Razor Twin Blade',desc:'Twin blade disposable razor for a close, comfortable shave. Pack of 5.',price:'KES 120',old:'',unit:'Per pack of 5',tag:''},
+ ],
+ beverages:[
+ {icon:'🥤',cat:'Beverages',name:'Coca Cola 500ml',desc:'The world\'s favourite soft drink. Cold and refreshing.',price:'KES 60',old:'',unit:'Per bottle',tag:'Popular'},
+ {icon:'🧃',cat:'Beverages',name:'Afia Juice 500ml',desc:'Natural fruit juice made from real fruit concentrate. No artificial colours.',price:'KES 75',old:'KES 80',unit:'Per bottle',tag:'Sale'},
+ {icon:'☕',cat:'Beverages',name:'Kericho Gold Tea Bags 50pk',desc:'Premium Kenyan highland tea. Rich flavour and aroma. Perfect for the whole family.',price:'KES 180',old:'',unit:'Per 50 bag pack',tag:''},
+ {icon:'🍫',cat:'Beverages',name:'Milo 400g',desc:'Chocolate malt drink. Energy-boosting and loved by children and adults alike.',price:'KES 350',old:'KES 370',unit:'Per 400g tin',tag:'Sale'},
+ {icon:'🥛',cat:'Beverages',name:'Quencher Juice 1 Litre',desc:'Refreshing fruit punch juice drink. Available in orange, mango and tropical flavours.',price:'KES 120',old:'',unit:'Per 1L pack',tag:'New'},
+ ],
+ drygoods:[
+ {icon:'🌾',cat:'Dry Goods',name:'Pembe Maize Flour 2kg',desc:'Premium sifted maize meal for smooth, lump-free ugali. A staple in every Kenyan household.',price:'KES 170',old:'KES 185',unit:'Per 2kg pack',tag:'Sale'},
+ {icon:'🍚',cat:'Dry Goods',name:'Pishori Rice 2kg',desc:'Premium Kenyan Pishori rice from Mwea. Aromatic, fluffy and perfect for every occasion.',price:'KES 380',old:'',unit:'Per 2kg pack',tag:'Popular'},
+ {icon:'🍬',cat:'Dry Goods',name:'Mumias Sugar 2kg',desc:'Pure refined white sugar from Mumias Sugar Company. Consistent quality every time.',price:'KES 260',old:'KES 275',unit:'Per 2kg pack',tag:'Sale'},
+ {icon:'🫙',cat:'Dry Goods',name:'Pwani Cooking Oil 2 Litres',desc:'Pure refined vegetable cooking oil. Light, healthy and ideal for frying and cooking.',price:'KES 380',old:'',unit:'Per 2L bottle',tag:''},
+ {icon:'🌿',cat:'Dry Goods',name:'Unga Dola Maize Flour 2kg',desc:'Finely milled maize flour enriched with iron and zinc. Consistent smooth texture.',price:'KES 165',old:'',unit:'Per 2kg pack',tag:''},
+ {icon:'🫘',cat:'Dry Goods',name:'Kenyan Dry Beans 1kg',desc:'Premium quality Kenyan dry beans. High in protein and fibre. Locally sourced.',price:'KES 150',old:'KES 165',unit:'Per 1kg pack',tag:'Sale'},
+ ],
+ electronics:[
+ {icon:'🍳',cat:'Home & Kitchen',name:'Non-Stick Frying Pan 24cm',desc:'Quality non-stick frying pan. Even heat distribution and easy to clean.',price:'KES 850',old:'KES 950',unit:'Per piece',tag:'Sale'},
+ {icon:'🫖',cat:'Home & Kitchen',name:'Electric Kettle 1.7L',desc:'Fast-boiling electric kettle. Automatic cut-off for safety. 1.7 litre capacity.',price:'KES 1,800',old:'',unit:'Per piece',tag:''},
+ {icon:'👕',cat:'Clothing',name:"Men's T-Shirt",desc:'Quality cotton blend t-shirt. Available in assorted colours and sizes. Great value.',price:'KES 350',old:'KES 450',unit:'Per piece',tag:'Sale'},
+ {icon:'👗',cat:'Clothing',name:"Women's Dress",desc:'Casual cotton dress in vibrant Kenyan prints. Available in multiple sizes.',price:'KES 550',old:'KES 700',unit:'Per piece',tag:'Sale'},
+ {icon:'🛁',cat:'Home',name:'Plastic Storage Basin 15L',desc:'Durable plastic basin for laundry, bathing and general household use.',price:'KES 280',old:'',unit:'Per piece',tag:''},
+ ]
+};
+var CAT_INFO = {
+ produce:['Fresh <span style="color:var(--green)">Produce</span>','Handpicked daily from Kenyan farms — always fresh, always affordable'],
+ dairy:['Dairy <span style="color:var(--green)">&amp; Eggs</span>','Fresh dairy products including our own Magunas Yoghurt brand'],
+ bakery:['In-Store <span style="color:var(--green)">Bakery</span>','Freshly baked every day — bread, cinnamon rolls, mandazi and more'],
+ household:['Household <span style="color:var(--green)">Products</span>','Everything you need to keep your home clean and running smoothly'],
+ personal:['Personal <span style="color:var(--green)">Care</span>','Skincare, haircare, dental care and personal hygiene essentials'],
+ beverages:['Beverages <span style="color:var(--green)">&amp; Drinks</span>','Soft drinks, juices, tea, cocoa and refreshing beverages for the whole family'],
+ drygoods:['Dry <span style="color:var(--green)">Goods</span>','Flour, rice, sugar, cooking oil, grains and staple food items'],
+ electronics:['Home <span style="color:var(--green)">&amp; Clothing</span>','Kitchenware, small appliances and affordable clothing for the whole family']
+};
+function showPage(id){
+ document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+ var pg = document.getElementById('page-'+id);
+ if(pg){pg.classList.add('active');window.scrollTo(0,0)}
+}
+function goHome(){showPage('home')}
+function goTo(id){
+ setTimeout(function(){
+ var el=document.getElementById(id);
+ if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+ },120);
+}
+function toggleMenu(){document.getElementById('mobileNav').classList.toggle('open')}
+function showCatalog(cat){
+ var info=CAT_INFO[cat]||[cat,''];
+ document.getElementById('cat-title').innerHTML=info[0];
+ document.getElementById('cat-sub').textContent=info[1];
+ var prods=PRODUCTS[cat]||[];
+ var html='';
+ prods.forEach(function(p){
+ var tagHtml='';
+ if(p.tag==='Sale')tagHtml='<div class="prod-tag">Sale</div>';
+ else if(p.tag==='New')tagHtml='<div class="prod-tag new">New</div>';
+ else if(p.tag==='Popular')tagHtml='<div class="prod-tag popular">Popular</div>';
+ else if(p.tag==='Fresh')tagHtml='<div class="prod-tag new">Fresh</div>';
+ var oldHtml=p.old?'<span class="prod-old">'+p.old+'</span>':'';
+ html+='<div class="prod">'+
+ '<div class="prod-img">'+p.icon+tagHtml+'</div>'+
+ '<div class="prod-body">'+
+ '<div class="prod-cat">'+p.cat+'</div>'+
+ '<div class="prod-name">'+p.name+'</div>'+
+ '<div class="prod-desc">'+p.desc+'</div>'+
+ '<div class="prod-price-row"><span class="prod-price">'+p.price+'</span>'+oldHtml+'</div>'+
+ '<div class="prod-unit">'+p.unit+'</div>'+
+ '</div>'+
+ '<div class="prod-foot"><span class="prod-stock">In Stock</span><button class="add-btn" onclick="addFeedback(this)">Add to Cart</button></div>'+
+ '</div>';
+ });
+ document.getElementById('cat-products').innerHTML=html;
+ showPage('catalog');
+}
+function addFeedback(btn){
+ var orig=btn.textContent;
+ btn.textContent='Added!';
+ btn.style.background='#007700';
+ setTimeout(function(){btn.textContent=orig;btn.style.background=''},1500);
+}
+function submitForm(e){
+ e.preventDefault();
+ var btn=e.target.querySelector('.cf-submit');
+ btn.textContent='Message Sent!';
+ btn.style.background='#007700';
+ setTimeout(function(){btn.textContent='Send Message \u2192';btn.style.background='';e.target.reset()},3000);
+}
+window.addEventListener('scroll',function(){
+ var nav=document.getElementById('nav');
+ if(nav)nav.style.boxShadow=window.scrollY>50?'0 4px 24px rgba(26,122,26,0.12)':'0 2px 20px rgba(26,122,26,0.08)';
+});
+</script>
+</body>
+</html>
